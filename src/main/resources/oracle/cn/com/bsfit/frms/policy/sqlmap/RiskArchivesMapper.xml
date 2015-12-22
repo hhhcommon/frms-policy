@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.bsfit.frms.mgr.mapper.RiskArchivesMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.bsfit.frms.mgr.pojo.RiskArchives" >
+    <id column="ARCHIVES_ID" property="archivesId" jdbcType="DECIMAL" />
+    <result column="ACCT_ID" property="acctId" jdbcType="VARCHAR" />
+    <result column="RISK_LEVEL" property="riskLevel" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="SCORE" property="score" jdbcType="DECIMAL" />
+    <result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="BIZ_CODE" property="bizCode" jdbcType="VARCHAR" />
+    <result column="TRANS_ID" property="transId" jdbcType="VARCHAR" />
+    <result column="TRANS_VOL" property="transVol" jdbcType="DECIMAL" />
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="BIZ_CATEGORY" property="bizCategory" jdbcType="VARCHAR" />
+    <result column="CHECK_ID" property="checkId" jdbcType="DECIMAL" />
+    <result column="DEAL_WAY" property="dealWay" jdbcType="DECIMAL" />
+    <result column="CONTROL_STATUS" property="controlStatus" jdbcType="DECIMAL" />
+    <result column="SOURCE" property="source" jdbcType="DECIMAL" />
+    <result column="CHECK_STATUS" property="checkStatus" jdbcType="DECIMAL" />
+    <result column="BANK" property="bank" jdbcType="VARCHAR" />
+    <result column="OID_PARTNER" property="oidPartner" jdbcType="VARCHAR" />
+    <result column="USER_LOGIN" property="userLogin" jdbcType="VARCHAR" />
+    <result column="USERS_ID" property="usersId" jdbcType="DECIMAL" />
+    <result column="VERIFY_CODE" property="verifyCode" jdbcType="VARCHAR" />
+    <result column="NOTIFY_CODE" property="notifyCode" jdbcType="VARCHAR" />
+    <result column="CONTROL_SCODE" property="controlScode" jdbcType="VARCHAR" />
+    <result column="CONTROL_FCODE" property="controlFcode" jdbcType="VARCHAR" />
+    <result column="MACHINE_ID" property="machineId" jdbcType="VARCHAR" />
+    <result column="IS_AML" property="isAml" jdbcType="DECIMAL" />
+    <result column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+    <result column="OPER_TIME" property="operTime" jdbcType="TIMESTAMP" />
+    <result column="TRANS_IP" property="transIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ARCHIVES_ID, ACCT_ID, RISK_LEVEL, STATUS, SCORE, COMMENTS, CREATE_TIME, UPDATE_TIME, 
+    BIZ_CODE, TRANS_ID, TRANS_VOL, UUID, BIZ_CATEGORY, CHECK_ID, DEAL_WAY, CONTROL_STATUS, 
+    SOURCE, CHECK_STATUS, BANK, OID_PARTNER, USER_LOGIN, USERS_ID, VERIFY_CODE, NOTIFY_CODE, 
+    CONTROL_SCODE, CONTROL_FCODE, MACHINE_ID, IS_AML, DEPT_ID, OPERATOR, OPER_TIME, TRANS_IP
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchivesExample" >
+    <include refid="OracleDialectPrefix" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from RISK_ARCHIVES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="OracleDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from RISK_ARCHIVES
+    where ARCHIVES_ID = #{archivesId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from RISK_ARCHIVES
+    where ARCHIVES_ID = #{archivesId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchivesExample" >
+    delete from RISK_ARCHIVES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchives" >
+    <selectKey resultType="java.lang.Long" keyProperty="archivesId" order="BEFORE" >
+      select RISKS_SEQ.nextval from dual
+    </selectKey>
+    insert into RISK_ARCHIVES (ARCHIVES_ID, ACCT_ID, RISK_LEVEL, 
+      STATUS, SCORE, COMMENTS, 
+      CREATE_TIME, UPDATE_TIME, BIZ_CODE, 
+      TRANS_ID, TRANS_VOL, UUID, 
+      BIZ_CATEGORY, CHECK_ID, DEAL_WAY, 
+      CONTROL_STATUS, SOURCE, CHECK_STATUS, 
+      BANK, OID_PARTNER, USER_LOGIN, 
+      USERS_ID, VERIFY_CODE, NOTIFY_CODE, 
+      CONTROL_SCODE, CONTROL_FCODE, MACHINE_ID, 
+      IS_AML, DEPT_ID, OPERATOR, 
+      OPER_TIME, TRANS_IP)
+    values (#{archivesId,jdbcType=DECIMAL}, #{acctId,jdbcType=VARCHAR}, #{riskLevel,jdbcType=DECIMAL}, 
+      #{status,jdbcType=DECIMAL}, #{score,jdbcType=DECIMAL}, #{comments,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{bizCode,jdbcType=VARCHAR}, 
+      #{transId,jdbcType=VARCHAR}, #{transVol,jdbcType=DECIMAL}, #{uuid,jdbcType=VARCHAR}, 
+      #{bizCategory,jdbcType=VARCHAR}, #{checkId,jdbcType=DECIMAL}, #{dealWay,jdbcType=DECIMAL}, 
+      #{controlStatus,jdbcType=DECIMAL}, #{source,jdbcType=DECIMAL}, #{checkStatus,jdbcType=DECIMAL}, 
+      #{bank,jdbcType=VARCHAR}, #{oidPartner,jdbcType=VARCHAR}, #{userLogin,jdbcType=VARCHAR}, 
+      #{usersId,jdbcType=DECIMAL}, #{verifyCode,jdbcType=VARCHAR}, #{notifyCode,jdbcType=VARCHAR}, 
+      #{controlScode,jdbcType=VARCHAR}, #{controlFcode,jdbcType=VARCHAR}, #{machineId,jdbcType=VARCHAR}, 
+      #{isAml,jdbcType=DECIMAL}, #{deptId,jdbcType=DECIMAL}, #{operator,jdbcType=VARCHAR}, 
+      #{operTime,jdbcType=TIMESTAMP}, #{transIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchives" >
+    <selectKey resultType="java.lang.Long" keyProperty="archivesId" order="BEFORE" >
+      select RISKS_SEQ.nextval from dual
+    </selectKey>
+    insert into RISK_ARCHIVES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ARCHIVES_ID,
+      <if test="acctId != null" >
+        ACCT_ID,
+      </if>
+      <if test="riskLevel != null" >
+        RISK_LEVEL,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="score != null" >
+        SCORE,
+      </if>
+      <if test="comments != null" >
+        COMMENTS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="bizCode != null" >
+        BIZ_CODE,
+      </if>
+      <if test="transId != null" >
+        TRANS_ID,
+      </if>
+      <if test="transVol != null" >
+        TRANS_VOL,
+      </if>
+      <if test="uuid != null" >
+        UUID,
+      </if>
+      <if test="bizCategory != null" >
+        BIZ_CATEGORY,
+      </if>
+      <if test="checkId != null" >
+        CHECK_ID,
+      </if>
+      <if test="dealWay != null" >
+        DEAL_WAY,
+      </if>
+      <if test="controlStatus != null" >
+        CONTROL_STATUS,
+      </if>
+      <if test="source != null" >
+        SOURCE,
+      </if>
+      <if test="checkStatus != null" >
+        CHECK_STATUS,
+      </if>
+      <if test="bank != null" >
+        BANK,
+      </if>
+      <if test="oidPartner != null" >
+        OID_PARTNER,
+      </if>
+      <if test="userLogin != null" >
+        USER_LOGIN,
+      </if>
+      <if test="usersId != null" >
+        USERS_ID,
+      </if>
+      <if test="verifyCode != null" >
+        VERIFY_CODE,
+      </if>
+      <if test="notifyCode != null" >
+        NOTIFY_CODE,
+      </if>
+      <if test="controlScode != null" >
+        CONTROL_SCODE,
+      </if>
+      <if test="controlFcode != null" >
+        CONTROL_FCODE,
+      </if>
+      <if test="machineId != null" >
+        MACHINE_ID,
+      </if>
+      <if test="isAml != null" >
+        IS_AML,
+      </if>
+      <if test="deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="operator != null" >
+        OPERATOR,
+      </if>
+      <if test="operTime != null" >
+        OPER_TIME,
+      </if>
+      <if test="transIp != null" >
+        TRANS_IP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{archivesId,jdbcType=DECIMAL},
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="riskLevel != null" >
+        #{riskLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="comments != null" >
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bizCode != null" >
+        #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="transId != null" >
+        #{transId,jdbcType=VARCHAR},
+      </if>
+      <if test="transVol != null" >
+        #{transVol,jdbcType=DECIMAL},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="bizCategory != null" >
+        #{bizCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="checkId != null" >
+        #{checkId,jdbcType=DECIMAL},
+      </if>
+      <if test="dealWay != null" >
+        #{dealWay,jdbcType=DECIMAL},
+      </if>
+      <if test="controlStatus != null" >
+        #{controlStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=DECIMAL},
+      </if>
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="oidPartner != null" >
+        #{oidPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogin != null" >
+        #{userLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="usersId != null" >
+        #{usersId,jdbcType=DECIMAL},
+      </if>
+      <if test="verifyCode != null" >
+        #{verifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyCode != null" >
+        #{notifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="controlScode != null" >
+        #{controlScode,jdbcType=VARCHAR},
+      </if>
+      <if test="controlFcode != null" >
+        #{controlFcode,jdbcType=VARCHAR},
+      </if>
+      <if test="machineId != null" >
+        #{machineId,jdbcType=VARCHAR},
+      </if>
+      <if test="isAml != null" >
+        #{isAml,jdbcType=DECIMAL},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=DECIMAL},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null" >
+        #{operTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transIp != null" >
+        #{transIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchivesExample" resultType="java.lang.Integer" >
+    select count(*) from RISK_ARCHIVES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update RISK_ARCHIVES
+    <set >
+      <if test="record.archivesId != null" >
+        ARCHIVES_ID = #{record.archivesId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.acctId != null" >
+        ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riskLevel != null" >
+        RISK_LEVEL = #{record.riskLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=DECIMAL},
+      </if>
+      <if test="record.score != null" >
+        SCORE = #{record.score,jdbcType=DECIMAL},
+      </if>
+      <if test="record.comments != null" >
+        COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bizCode != null" >
+        BIZ_CODE = #{record.bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transId != null" >
+        TRANS_ID = #{record.transId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transVol != null" >
+        TRANS_VOL = #{record.transVol,jdbcType=DECIMAL},
+      </if>
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizCategory != null" >
+        BIZ_CATEGORY = #{record.bizCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkId != null" >
+        CHECK_ID = #{record.checkId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dealWay != null" >
+        DEAL_WAY = #{record.dealWay,jdbcType=DECIMAL},
+      </if>
+      <if test="record.controlStatus != null" >
+        CONTROL_STATUS = #{record.controlStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.source != null" >
+        SOURCE = #{record.source,jdbcType=DECIMAL},
+      </if>
+      <if test="record.checkStatus != null" >
+        CHECK_STATUS = #{record.checkStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bank != null" >
+        BANK = #{record.bank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oidPartner != null" >
+        OID_PARTNER = #{record.oidPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLogin != null" >
+        USER_LOGIN = #{record.userLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usersId != null" >
+        USERS_ID = #{record.usersId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.verifyCode != null" >
+        VERIFY_CODE = #{record.verifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notifyCode != null" >
+        NOTIFY_CODE = #{record.notifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.controlScode != null" >
+        CONTROL_SCODE = #{record.controlScode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.controlFcode != null" >
+        CONTROL_FCODE = #{record.controlFcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machineId != null" >
+        MACHINE_ID = #{record.machineId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAml != null" >
+        IS_AML = #{record.isAml,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operator != null" >
+        OPERATOR = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operTime != null" >
+        OPER_TIME = #{record.operTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.transIp != null" >
+        TRANS_IP = #{record.transIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update RISK_ARCHIVES
+    set ARCHIVES_ID = #{record.archivesId,jdbcType=DECIMAL},
+      ACCT_ID = #{record.acctId,jdbcType=VARCHAR},
+      RISK_LEVEL = #{record.riskLevel,jdbcType=DECIMAL},
+      STATUS = #{record.status,jdbcType=DECIMAL},
+      SCORE = #{record.score,jdbcType=DECIMAL},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      BIZ_CODE = #{record.bizCode,jdbcType=VARCHAR},
+      TRANS_ID = #{record.transId,jdbcType=VARCHAR},
+      TRANS_VOL = #{record.transVol,jdbcType=DECIMAL},
+      UUID = #{record.uuid,jdbcType=VARCHAR},
+      BIZ_CATEGORY = #{record.bizCategory,jdbcType=VARCHAR},
+      CHECK_ID = #{record.checkId,jdbcType=DECIMAL},
+      DEAL_WAY = #{record.dealWay,jdbcType=DECIMAL},
+      CONTROL_STATUS = #{record.controlStatus,jdbcType=DECIMAL},
+      SOURCE = #{record.source,jdbcType=DECIMAL},
+      CHECK_STATUS = #{record.checkStatus,jdbcType=DECIMAL},
+      BANK = #{record.bank,jdbcType=VARCHAR},
+      OID_PARTNER = #{record.oidPartner,jdbcType=VARCHAR},
+      USER_LOGIN = #{record.userLogin,jdbcType=VARCHAR},
+      USERS_ID = #{record.usersId,jdbcType=DECIMAL},
+      VERIFY_CODE = #{record.verifyCode,jdbcType=VARCHAR},
+      NOTIFY_CODE = #{record.notifyCode,jdbcType=VARCHAR},
+      CONTROL_SCODE = #{record.controlScode,jdbcType=VARCHAR},
+      CONTROL_FCODE = #{record.controlFcode,jdbcType=VARCHAR},
+      MACHINE_ID = #{record.machineId,jdbcType=VARCHAR},
+      IS_AML = #{record.isAml,jdbcType=DECIMAL},
+      DEPT_ID = #{record.deptId,jdbcType=DECIMAL},
+      OPERATOR = #{record.operator,jdbcType=VARCHAR},
+      OPER_TIME = #{record.operTime,jdbcType=TIMESTAMP},
+      TRANS_IP = #{record.transIp,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchives" >
+    update RISK_ARCHIVES
+    <set >
+      <if test="acctId != null" >
+        ACCT_ID = #{acctId,jdbcType=VARCHAR},
+      </if>
+      <if test="riskLevel != null" >
+        RISK_LEVEL = #{riskLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="score != null" >
+        SCORE = #{score,jdbcType=DECIMAL},
+      </if>
+      <if test="comments != null" >
+        COMMENTS = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bizCode != null" >
+        BIZ_CODE = #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="transId != null" >
+        TRANS_ID = #{transId,jdbcType=VARCHAR},
+      </if>
+      <if test="transVol != null" >
+        TRANS_VOL = #{transVol,jdbcType=DECIMAL},
+      </if>
+      <if test="uuid != null" >
+        UUID = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="bizCategory != null" >
+        BIZ_CATEGORY = #{bizCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="checkId != null" >
+        CHECK_ID = #{checkId,jdbcType=DECIMAL},
+      </if>
+      <if test="dealWay != null" >
+        DEAL_WAY = #{dealWay,jdbcType=DECIMAL},
+      </if>
+      <if test="controlStatus != null" >
+        CONTROL_STATUS = #{controlStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="source != null" >
+        SOURCE = #{source,jdbcType=DECIMAL},
+      </if>
+      <if test="checkStatus != null" >
+        CHECK_STATUS = #{checkStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="bank != null" >
+        BANK = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="oidPartner != null" >
+        OID_PARTNER = #{oidPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogin != null" >
+        USER_LOGIN = #{userLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="usersId != null" >
+        USERS_ID = #{usersId,jdbcType=DECIMAL},
+      </if>
+      <if test="verifyCode != null" >
+        VERIFY_CODE = #{verifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyCode != null" >
+        NOTIFY_CODE = #{notifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="controlScode != null" >
+        CONTROL_SCODE = #{controlScode,jdbcType=VARCHAR},
+      </if>
+      <if test="controlFcode != null" >
+        CONTROL_FCODE = #{controlFcode,jdbcType=VARCHAR},
+      </if>
+      <if test="machineId != null" >
+        MACHINE_ID = #{machineId,jdbcType=VARCHAR},
+      </if>
+      <if test="isAml != null" >
+        IS_AML = #{isAml,jdbcType=DECIMAL},
+      </if>
+      <if test="deptId != null" >
+        DEPT_ID = #{deptId,jdbcType=DECIMAL},
+      </if>
+      <if test="operator != null" >
+        OPERATOR = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null" >
+        OPER_TIME = #{operTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transIp != null" >
+        TRANS_IP = #{transIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ARCHIVES_ID = #{archivesId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchives" >
+    update RISK_ARCHIVES
+    set ACCT_ID = #{acctId,jdbcType=VARCHAR},
+      RISK_LEVEL = #{riskLevel,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      SCORE = #{score,jdbcType=DECIMAL},
+      COMMENTS = #{comments,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      BIZ_CODE = #{bizCode,jdbcType=VARCHAR},
+      TRANS_ID = #{transId,jdbcType=VARCHAR},
+      TRANS_VOL = #{transVol,jdbcType=DECIMAL},
+      UUID = #{uuid,jdbcType=VARCHAR},
+      BIZ_CATEGORY = #{bizCategory,jdbcType=VARCHAR},
+      CHECK_ID = #{checkId,jdbcType=DECIMAL},
+      DEAL_WAY = #{dealWay,jdbcType=DECIMAL},
+      CONTROL_STATUS = #{controlStatus,jdbcType=DECIMAL},
+      SOURCE = #{source,jdbcType=DECIMAL},
+      CHECK_STATUS = #{checkStatus,jdbcType=DECIMAL},
+      BANK = #{bank,jdbcType=VARCHAR},
+      OID_PARTNER = #{oidPartner,jdbcType=VARCHAR},
+      USER_LOGIN = #{userLogin,jdbcType=VARCHAR},
+      USERS_ID = #{usersId,jdbcType=DECIMAL},
+      VERIFY_CODE = #{verifyCode,jdbcType=VARCHAR},
+      NOTIFY_CODE = #{notifyCode,jdbcType=VARCHAR},
+      CONTROL_SCODE = #{controlScode,jdbcType=VARCHAR},
+      CONTROL_FCODE = #{controlFcode,jdbcType=VARCHAR},
+      MACHINE_ID = #{machineId,jdbcType=VARCHAR},
+      IS_AML = #{isAml,jdbcType=DECIMAL},
+      DEPT_ID = #{deptId,jdbcType=DECIMAL},
+      OPERATOR = #{operator,jdbcType=VARCHAR},
+      OPER_TIME = #{operTime,jdbcType=TIMESTAMP},
+      TRANS_IP = #{transIp,jdbcType=VARCHAR}
+    where ARCHIVES_ID = #{archivesId,jdbcType=DECIMAL}
+  </update>
+  <sql id="OracleDialectPrefix" >
+    <if test="page != null" >
+      select * from ( select row_.*, rownum rownum_ from ( 
+    </if>
+  </sql>
+  <sql id="OracleDialectSuffix" >
+    <if test="page != null" >
+      <![CDATA[ ) row_ ) where rownum_ > #{page.begin} and rownum_ <= #{page.end} ]]>
+    </if>
+  </sql>
+</mapper>
