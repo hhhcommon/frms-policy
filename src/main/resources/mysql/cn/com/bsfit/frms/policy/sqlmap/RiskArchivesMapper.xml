@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.com.bsfit.frms.mgr.mapper.RiskArchivesMapper" >
-  <resultMap id="BaseResultMap" type="cn.com.bsfit.frms.mgr.pojo.RiskArchives" >
+<mapper namespace="cn.com.bsfit.frms.policy.mapper.RiskArchivesMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.bsfit.frms.policy.pojo.RiskArchives" >
     <id column="ARCHIVES_ID" property="archivesId" jdbcType="BIGINT" />
     <result column="ACCT_ID" property="acctId" jdbcType="VARCHAR" />
     <result column="RISK_LEVEL" property="riskLevel" jdbcType="DECIMAL" />
@@ -99,7 +99,7 @@
     SOURCE, CHECK_STATUS, BANK, OID_PARTNER, USER_LOGIN, USERS_ID, VERIFY_CODE, NOTIFY_CODE, 
     CONTROL_SCODE, CONTROL_FCODE, MACHINE_ID, IS_AML, DEPT_ID, OPERATOR, OPER_TIME, TRANS_IP
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchivesExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.bsfit.frms.policy.pojo.RiskArchivesExample" >
     select
     <if test="distinct" >
       distinct
@@ -112,7 +112,6 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
-    <include refid="MysqlSuffix" />
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -124,45 +123,42 @@
     delete from risk_archives
     where ARCHIVES_ID = #{archivesId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchivesExample" >
+  <delete id="deleteByExample" parameterType="cn.com.bsfit.frms.policy.pojo.RiskArchivesExample" >
     delete from risk_archives
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchives" >
-    <selectKey resultType="java.lang.Long" keyProperty="archivesId" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into risk_archives (ACCT_ID, RISK_LEVEL, STATUS, 
-      SCORE, COMMENTS, CREATE_TIME, 
-      UPDATE_TIME, BIZ_CODE, TRANS_ID, 
-      TRANS_VOL, UUID, BIZ_CATEGORY, 
-      CHECK_ID, DEAL_WAY, CONTROL_STATUS, 
-      SOURCE, CHECK_STATUS, BANK, 
-      OID_PARTNER, USER_LOGIN, USERS_ID, 
-      VERIFY_CODE, NOTIFY_CODE, CONTROL_SCODE, 
-      CONTROL_FCODE, MACHINE_ID, IS_AML, 
-      DEPT_ID, OPERATOR, OPER_TIME, 
-      TRANS_IP)
-    values (#{acctId,jdbcType=VARCHAR}, #{riskLevel,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, 
-      #{score,jdbcType=DECIMAL}, #{comments,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{bizCode,jdbcType=VARCHAR}, #{transId,jdbcType=VARCHAR}, 
-      #{transVol,jdbcType=DECIMAL}, #{uuid,jdbcType=VARCHAR}, #{bizCategory,jdbcType=VARCHAR}, 
-      #{checkId,jdbcType=DECIMAL}, #{dealWay,jdbcType=DECIMAL}, #{controlStatus,jdbcType=DECIMAL}, 
-      #{source,jdbcType=DECIMAL}, #{checkStatus,jdbcType=DECIMAL}, #{bank,jdbcType=VARCHAR}, 
-      #{oidPartner,jdbcType=VARCHAR}, #{userLogin,jdbcType=VARCHAR}, #{usersId,jdbcType=DECIMAL}, 
-      #{verifyCode,jdbcType=VARCHAR}, #{notifyCode,jdbcType=VARCHAR}, #{controlScode,jdbcType=VARCHAR}, 
-      #{controlFcode,jdbcType=VARCHAR}, #{machineId,jdbcType=VARCHAR}, #{isAml,jdbcType=DECIMAL}, 
-      #{deptId,jdbcType=DECIMAL}, #{operator,jdbcType=VARCHAR}, #{operTime,jdbcType=TIMESTAMP}, 
-      #{transIp,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="cn.com.bsfit.frms.policy.pojo.RiskArchives" >
+    insert into risk_archives (ARCHIVES_ID, ACCT_ID, RISK_LEVEL, 
+      STATUS, SCORE, COMMENTS, 
+      CREATE_TIME, UPDATE_TIME, BIZ_CODE, 
+      TRANS_ID, TRANS_VOL, UUID, 
+      BIZ_CATEGORY, CHECK_ID, DEAL_WAY, 
+      CONTROL_STATUS, SOURCE, CHECK_STATUS, 
+      BANK, OID_PARTNER, USER_LOGIN, 
+      USERS_ID, VERIFY_CODE, NOTIFY_CODE, 
+      CONTROL_SCODE, CONTROL_FCODE, MACHINE_ID, 
+      IS_AML, DEPT_ID, OPERATOR, 
+      OPER_TIME, TRANS_IP)
+    values (#{archivesId,jdbcType=BIGINT}, #{acctId,jdbcType=VARCHAR}, #{riskLevel,jdbcType=DECIMAL}, 
+      #{status,jdbcType=DECIMAL}, #{score,jdbcType=DECIMAL}, #{comments,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{bizCode,jdbcType=VARCHAR}, 
+      #{transId,jdbcType=VARCHAR}, #{transVol,jdbcType=DECIMAL}, #{uuid,jdbcType=VARCHAR}, 
+      #{bizCategory,jdbcType=VARCHAR}, #{checkId,jdbcType=DECIMAL}, #{dealWay,jdbcType=DECIMAL}, 
+      #{controlStatus,jdbcType=DECIMAL}, #{source,jdbcType=DECIMAL}, #{checkStatus,jdbcType=DECIMAL}, 
+      #{bank,jdbcType=VARCHAR}, #{oidPartner,jdbcType=VARCHAR}, #{userLogin,jdbcType=VARCHAR}, 
+      #{usersId,jdbcType=DECIMAL}, #{verifyCode,jdbcType=VARCHAR}, #{notifyCode,jdbcType=VARCHAR}, 
+      #{controlScode,jdbcType=VARCHAR}, #{controlFcode,jdbcType=VARCHAR}, #{machineId,jdbcType=VARCHAR}, 
+      #{isAml,jdbcType=DECIMAL}, #{deptId,jdbcType=DECIMAL}, #{operator,jdbcType=VARCHAR}, 
+      #{operTime,jdbcType=TIMESTAMP}, #{transIp,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchives" >
-    <selectKey resultType="java.lang.Long" keyProperty="archivesId" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+  <insert id="insertSelective" parameterType="cn.com.bsfit.frms.policy.pojo.RiskArchives" >
     insert into risk_archives
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="archivesId != null" >
+        ARCHIVES_ID,
+      </if>
       <if test="acctId != null" >
         ACCT_ID,
       </if>
@@ -258,6 +254,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="archivesId != null" >
+        #{archivesId,jdbcType=BIGINT},
+      </if>
       <if test="acctId != null" >
         #{acctId,jdbcType=VARCHAR},
       </if>
@@ -353,8 +352,8 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchivesExample" resultType="java.lang.Integer" >
-    select count(*) from risk_archives
+  <select id="countByExample" parameterType="cn.com.bsfit.frms.policy.pojo.RiskArchivesExample" resultType="java.lang.Integer" >
+    select count(1) from risk_archives
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -501,7 +500,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchives" >
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.bsfit.frms.policy.pojo.RiskArchives" >
     update risk_archives
     <set >
       <if test="acctId != null" >
@@ -600,7 +599,7 @@
     </set>
     where ARCHIVES_ID = #{archivesId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.com.bsfit.frms.mgr.pojo.RiskArchives" >
+  <update id="updateByPrimaryKey" parameterType="cn.com.bsfit.frms.policy.pojo.RiskArchives" >
     update risk_archives
     set ACCT_ID = #{acctId,jdbcType=VARCHAR},
       RISK_LEVEL = #{riskLevel,jdbcType=DECIMAL},
@@ -635,9 +634,4 @@
       TRANS_IP = #{transIp,jdbcType=VARCHAR}
     where ARCHIVES_ID = #{archivesId,jdbcType=BIGINT}
   </update>
-  <sql id="MysqlSuffix" >
-    <if test="page != null" >
-      <![CDATA[ limit #{page.begin} , #{page.length} ]]>
-    </if>
-  </sql>
 </mapper>
