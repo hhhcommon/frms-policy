@@ -12,9 +12,9 @@ public interface RisksMapper {
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(Risks record);
+    long insert(Risks record);
 
-    int insertSelective(Risks record);
+    long insertSelective(Risks record);
 
     List<Risks> selectByExample(RisksExample example);
 
