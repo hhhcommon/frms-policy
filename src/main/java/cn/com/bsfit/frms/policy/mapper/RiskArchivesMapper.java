@@ -12,9 +12,9 @@ public interface RiskArchivesMapper {
 
     int deleteByPrimaryKey(Long archivesId);
 
-    long insert(RiskArchives record);
+    int insert(RiskArchives record);
 
-    long insertSelective(RiskArchives record);
+    int insertSelective(RiskArchives record);
 
     List<RiskArchives> selectByExample(RiskArchivesExample example);
 

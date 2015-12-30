@@ -89,6 +89,10 @@ public class RiskArchives implements Serializable {
 
     private Integer refundNum;
 
+    private String productId;
+
+    private String ruleIds;
+
     private static final long serialVersionUID = 1L;
 
     public Long getArchivesId() {
@@ -427,6 +431,22 @@ public class RiskArchives implements Serializable {
         this.refundNum = refundNum;
     }
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId == null ? null : productId.trim();
+    }
+
+    public String getRuleIds() {
+        return ruleIds;
+    }
+
+    public void setRuleIds(String ruleIds) {
+        this.ruleIds = ruleIds == null ? null : ruleIds.trim();
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -480,7 +500,9 @@ public class RiskArchives implements Serializable {
             && (this.getMerOrderId() == null ? other.getMerOrderId() == null : this.getMerOrderId().equals(other.getMerOrderId()))
             && (this.getDeptRequestNum() == null ? other.getDeptRequestNum() == null : this.getDeptRequestNum().equals(other.getDeptRequestNum()))
             && (this.getRefundAmount() == null ? other.getRefundAmount() == null : this.getRefundAmount().equals(other.getRefundAmount()))
-            && (this.getRefundNum() == null ? other.getRefundNum() == null : this.getRefundNum().equals(other.getRefundNum()));
+            && (this.getRefundNum() == null ? other.getRefundNum() == null : this.getRefundNum().equals(other.getRefundNum()))
+            && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
+            && (this.getRuleIds() == null ? other.getRuleIds() == null : this.getRuleIds().equals(other.getRuleIds()));
     }
 
     @Override
@@ -529,6 +551,8 @@ public class RiskArchives implements Serializable {
         result = prime * result + ((getDeptRequestNum() == null) ? 0 : getDeptRequestNum().hashCode());
         result = prime * result + ((getRefundAmount() == null) ? 0 : getRefundAmount().hashCode());
         result = prime * result + ((getRefundNum() == null) ? 0 : getRefundNum().hashCode());
+        result = prime * result + ((getProductId() == null) ? 0 : getProductId().hashCode());
+        result = prime * result + ((getRuleIds() == null) ? 0 : getRuleIds().hashCode());
         return result;
     }
 }

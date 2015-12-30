@@ -2875,6 +2875,146 @@ public class RiskArchivesExample {
             addCriterion("REFUND_NUM not between", value1, value2, "refundNum");
             return (Criteria) this;
         }
+
+        public Criteria andProductIdIsNull() {
+            addCriterion("PRODUCT_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdIsNotNull() {
+            addCriterion("PRODUCT_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdEqualTo(String value) {
+            addCriterion("PRODUCT_ID =", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdNotEqualTo(String value) {
+            addCriterion("PRODUCT_ID <>", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdGreaterThan(String value) {
+            addCriterion("PRODUCT_ID >", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdGreaterThanOrEqualTo(String value) {
+            addCriterion("PRODUCT_ID >=", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdLessThan(String value) {
+            addCriterion("PRODUCT_ID <", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdLessThanOrEqualTo(String value) {
+            addCriterion("PRODUCT_ID <=", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdLike(String value) {
+            addCriterion("PRODUCT_ID like", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdNotLike(String value) {
+            addCriterion("PRODUCT_ID not like", value, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdIn(List<String> values) {
+            addCriterion("PRODUCT_ID in", values, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdNotIn(List<String> values) {
+            addCriterion("PRODUCT_ID not in", values, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdBetween(String value1, String value2) {
+            addCriterion("PRODUCT_ID between", value1, value2, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProductIdNotBetween(String value1, String value2) {
+            addCriterion("PRODUCT_ID not between", value1, value2, "productId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsIsNull() {
+            addCriterion("RULE_IDS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsIsNotNull() {
+            addCriterion("RULE_IDS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsEqualTo(String value) {
+            addCriterion("RULE_IDS =", value, "ruleIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsNotEqualTo(String value) {
+            addCriterion("RULE_IDS <>", value, "ruleIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsGreaterThan(String value) {
+            addCriterion("RULE_IDS >", value, "ruleIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsGreaterThanOrEqualTo(String value) {
+            addCriterion("RULE_IDS >=", value, "ruleIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsLessThan(String value) {
+            addCriterion("RULE_IDS <", value, "ruleIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsLessThanOrEqualTo(String value) {
+            addCriterion("RULE_IDS <=", value, "ruleIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsLike(String value) {
+            addCriterion("RULE_IDS like", value, "ruleIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsNotLike(String value) {
+            addCriterion("RULE_IDS not like", value, "ruleIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsIn(List<String> values) {
+            addCriterion("RULE_IDS in", values, "ruleIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsNotIn(List<String> values) {
+            addCriterion("RULE_IDS not in", values, "ruleIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsBetween(String value1, String value2) {
+            addCriterion("RULE_IDS between", value1, value2, "ruleIds");
+            return (Criteria) this;
+        }
+
+        public Criteria andRuleIdsNotBetween(String value1, String value2) {
+            addCriterion("RULE_IDS not between", value1, value2, "ruleIds");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -3005,6 +3145,16 @@ public class RiskArchivesExample {
 
         public Criteria andDeptRequestNumLikeInsensitive(String value) {
             addCriterion("upper(DEPT_REQUEST_NUM) like", value.toUpperCase(), "deptRequestNum");
+            return this;
+        }
+
+        public Criteria andProductIdLikeInsensitive(String value) {
+            addCriterion("upper(PRODUCT_ID) like", value.toUpperCase(), "productId");
+            return this;
+        }
+
+        public Criteria andRuleIdsLikeInsensitive(String value) {
+            addCriterion("upper(RULE_IDS) like", value.toUpperCase(), "ruleIds");
             return this;
         }
     }
