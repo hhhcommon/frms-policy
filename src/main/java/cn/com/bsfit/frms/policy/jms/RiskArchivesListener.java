@@ -12,7 +12,6 @@ import javax.jms.JMSException;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
-import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
@@ -90,9 +89,9 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 			final StringBuffer ruleNames = new StringBuffer("");
 			final StringBuffer ruleCodes = new StringBuffer("");
 			for(Risk risk : riskList) {
-				ruleNames.append(risk.getRuleName()).append(",");
+				ruleNames.append(risk.getRuleName()).append(',');
 				if (risk.getRuleName() != null) {
-					ruleCodes.append(risk.getRuleName().split(":").length > 1 ? risk.getRuleName().split(":")[1].trim() : "").append(",");
+					ruleCodes.append(risk.getRuleName().split(":").length > 1 ? risk.getRuleName().split(":")[1].trim() : "").append(',');
 	            }
 			}
 			if(ruleNames.charAt(ruleNames.length() - 1) == ',') {
@@ -107,13 +106,22 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 		// 创建时间
 		riskArchives.setCreateTime(auditObject.get("frms_create_time") == null ? new Date() : parse(auditObject.get("frms_create_time").toString()));
 		// 交易时间
-		riskArchives.setUpdateTime(auditObject.get("frms_trans_time") == null ? new Date() : (Date) auditObject.get("frms_trans_time"));
+		final Object obj = auditObject.get("frms_trans_time");
+		Date transTime = new Date();
+		if(obj instanceof Long) {
+			transTime = new Date((Long) obj);
+		} else if(obj instanceof String) {
+			transTime = parse(obj.toString());
+		} else if(obj instanceof Date) {
+			transTime = (Date) obj;
+		}
+		riskArchives.setUpdateTime(transTime);
 		// 业务类型
 		riskArchives.setBizCode(auditObject.get("frms_biz_code") == null ? "" : auditObject.get("frms_biz_code").toString());
 		// 交易号
 		riskArchives.setTransId(auditObject.get("frms_trans_id") == null ? "" : auditObject.get("frms_trans_id").toString());
 		// 交易金额
-		riskArchives.setTransVol(auditObject.get("frms_trans_vol") == null ? new BigDecimal("0") : new BigDecimal(auditObject.get("frms_trans_vol").toString()));
+		riskArchives.setTransVol(auditObject.get("frms_trans_vol") == null ? BigDecimal.ZERO : new BigDecimal(auditObject.get("frms_trans_vol").toString()));
 		// UUID
 		riskArchives.setUuid(auditObject.getUuid());
 		riskArchives.setBizCategory(auditObject.getBizCategory());

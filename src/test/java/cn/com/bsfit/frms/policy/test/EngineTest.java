@@ -40,7 +40,7 @@ public class EngineTest {
         ao.setTransTime(new Date());
         ao.put("frms_user_id","1111");
         ao.put("frms_finger","adfsdfs");
-        ao.put("frms_trans_time", new Date());
+        ao.put("frms_trans_time", new Date().getTime());
 //        ao.setTransVol(2900000L);
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        ao.setTransTime(sdf.parse("2015-04-26 15:43:40"));
