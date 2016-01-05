@@ -115,11 +115,11 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 		}
 		riskArchives.setUpdateTime(transTime);
 		// 业务类型
-		riskArchives.setBizCode(auditObject.get("frms_biz_code") == null ? "" : auditObject.get("frms_biz_code").toString());
+		riskArchives.setBizCode(auditObject.get("frms_order_type") == null ? "" : auditObject.get("frms_order_type").toString());
 		// 交易号
-		riskArchives.setTransId(auditObject.get("frms_trans_id") == null ? "" : auditObject.get("frms_trans_id").toString());
+		riskArchives.setTransId(auditObject.get("frms_order_id") == null ? "" : auditObject.get("frms_order_id").toString());
 		// 交易金额
-		riskArchives.setTransVol(auditObject.get("frms_trans_vol") == null ? BigDecimal.ZERO : new BigDecimal(auditObject.get("frms_trans_vol").toString()));
+		riskArchives.setTransVol(auditObject.get("frms_trans_amount") == null ? BigDecimal.ZERO : new BigDecimal(auditObject.get("frms_trans_amount").toString()));
 		// UUID
 		riskArchives.setUuid(auditObject.getUuid());
 		riskArchives.setBizCategory(auditObject.getBizCategory());
@@ -128,7 +128,7 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 		// 来源 默认规则触发
 		riskArchives.setSource(Short.valueOf("0"));
 		// 银行卡号
-		riskArchives.setBank(auditObject.get("frms_bank_card_no") == null ? "" : auditObject.get("frms_bank_card_no").toString());
+		riskArchives.setBank(auditObject.get("frms_pay_card_no") == null ? "" : auditObject.get("frms_pay_card_no").toString());
 		// 收款方ID
 		riskArchives.setOidPartner(auditObject.get("frms_col_user_id") == null ? "" : auditObject.get("frms_col_user_id").toString());
 		// 通道编号
@@ -140,9 +140,9 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 		// 是否为反洗钱
 		riskArchives.setIsAml(Short.valueOf("2"));
 		// 分公司ID
-		riskArchives.setDeptId(auditObject.get("frms_dept_id") == null ? "" : auditObject.get("frms_dept_id").toString());
+		riskArchives.setDeptId(auditObject.get("frms_dept_code") == null ? "" : auditObject.get("frms_dept_code").toString());
 		// 交易IP
-		riskArchives.setTransIp(auditObject.get("frms_ip_addr") == null ? "" : auditObject.get("frms_ip_addr").toString());
+		riskArchives.setTransIp(auditObject.get("frms_pay_ip") == null ? "" : auditObject.get("frms_pay_ip").toString());
 		// 交易状态
 		riskArchives.setTradeStatus(auditObject.get("frms_trade_status") == null ? "" : auditObject.get("frms_trade_status").toString());
 		// 币种
