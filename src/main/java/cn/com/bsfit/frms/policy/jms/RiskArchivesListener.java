@@ -126,7 +126,7 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 		riskArchives.setUuid(auditObject.getUuid());
 		riskArchives.setBizCategory(auditObject.getBizCategory());
 		// 订单状态
-		// riskArchives.setControlStatus(auditObject.getc);
+		riskArchives.setControlStatus(auditObject.get("frms_or_state") == null ? Short.valueOf("1") : Short.valueOf(auditObject.get("frms_or_state").toString()));
 		// 来源 默认规则触发
 		riskArchives.setSource(Short.valueOf("0"));
 		// 银行卡号
@@ -134,11 +134,11 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 		// 收款方ID
 		riskArchives.setOidPartner(auditObject.get("frms_col_user_id") == null ? "" : auditObject.get("frms_col_user_id").toString());
 		// 通道编号
-		// riskArchives.setVerifyCode();
+		riskArchives.setVerifyCode(auditObject.get("frms_gateid") == null ? "" : auditObject.get("frms_gateid").toString());
 		// 支付产品编号
-		// riskArchives.setNotifyCode(auditObject.getnot);
+		riskArchives.setNotifyCode(auditObject.get("frms_trade_no") == null ? "" : auditObject.get("frms_trade_no").toString());
 		// 终端ID
-		// riskArchives.setMachineId();
+		riskArchives.setMachineId(auditObject.get("frms_terminalid") == null ? "" : auditObject.get("frms_terminalid").toString());
 		// 是否为反洗钱
 		riskArchives.setIsAml(Short.valueOf("2"));
 		// 分公司ID
@@ -146,27 +146,27 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 		// 交易IP
 		riskArchives.setTransIp(auditObject.get("frms_ip_addr") == null ? "" : auditObject.get("frms_ip_addr").toString());
 		// 交易状态
-		// riskArchives.setTradeStatus();
+		riskArchives.setTradeStatus(auditObject.get("frms_trade_status") == null ? "" : auditObject.get("frms_trade_status").toString());
 		// 币种
-		// riskArchives.setCurrency();
+		riskArchives.setCurrency(auditObject.get("frms_cry_type") == null ? "" : auditObject.get("frms_cry_type").toString());
 		// 手机归属地
-		// riskArchives.setMobileAttribution();
+		riskArchives.setMobileAttribution(auditObject.get("frms_phone_addr") == null ? "" : auditObject.get("frms_phone_addr").toString());
 		// IP归属地
-		// riskArchives.setIpAttribution();
+		riskArchives.setIpAttribution(auditObject.get("frms_trans_ip_addr") == null ? "" : auditObject.get("frms_trans_ip_addr").toString());
 		// MAC
-		// riskArchives.setMac();
+		riskArchives.setMac(auditObject.get("frms_mac_addr") == null ? "" : auditObject.get("frms_mac_addr").toString());
 		// 设备号
-		// riskArchives.setDeviceNum();
+		riskArchives.setDeviceNum(auditObject.get("frms_device_num") == null ? "" : auditObject.get("frms_device_num").toString());
 		// 商户订单号
-		// riskArchives.setMerOrderId();
+		riskArchives.setMerOrderId(auditObject.get("frms_orderid") == null ? "" : auditObject.get("frms_orderid").toString());
 		// 机构请求流水
-		// riskArchives.setDeptRequestNum();
+		riskArchives.setDeptRequestNum(auditObject.get("frms_trace") == null ? "" : auditObject.get("frms_trace").toString());
 		// 退款金额
-		// riskArchives.setRefundAmount();
+		riskArchives.setRefundAmount(auditObject.get("frms_refund_amount") == null ? Integer.MIN_VALUE : Integer.valueOf(auditObject.get("frms_refund_amount").toString()));
 		// 退款次数
-		// riskArchives.setRefundNum();
+		riskArchives.setRefundNum(auditObject.get("frms_refund_num") == null ? Integer.MIN_VALUE : Integer.valueOf(auditObject.get("frms_refund_num").toString()));
 		// 产品号
-		// riskArchives.setProductId(productId);
+		riskArchives.setProductId(auditObject.get("frms_product_id") == null ? "" : auditObject.get("frms_product_id").toString());
 		mapper.insertSelective(riskArchives);
 		return riskArchives.getArchivesId();
 	}
