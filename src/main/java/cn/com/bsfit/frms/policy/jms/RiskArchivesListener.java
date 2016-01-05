@@ -24,7 +24,6 @@ import com.alibaba.fastjson.JSON;
 
 import cn.com.bsfit.frms.obj.AuditObject;
 import cn.com.bsfit.frms.obj.AuditResult;
-import cn.com.bsfit.frms.obj.MemCachedItem;
 import cn.com.bsfit.frms.obj.Risk;
 import cn.com.bsfit.frms.policy.jms.util.SessionAwareBatchMessageListener;
 import cn.com.bsfit.frms.policy.mapper.RiskArchivesMapper;
@@ -62,7 +61,6 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 					if (publishObj != null && publishObj.size() >= 2) {
 						final AuditResult auditResult = (AuditResult) publishObj.get(0);
 						final AuditObject auditObject = (AuditObject) publishObj.get(1);
-						final List<MemCachedItem> memCachedItems = (publishObj.size() > 2 && publishObj.get(2) != null) ? (List<MemCachedItem>) publishObj.get(2) : null;
 						final long archivesId = saveRiskArchives(auditObject, auditResult, sqlSession);
 						saveRisks(auditResult, archivesId, sqlSession);
 					}
