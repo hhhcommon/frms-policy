@@ -127,6 +127,8 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 		riskArchives.setControlStatus(auditObject.get("frms_or_state") == null ? Short.valueOf("1") : Short.valueOf(auditObject.get("frms_or_state").toString()));
 		// 来源 默认规则触发
 		riskArchives.setSource(Short.valueOf("0"));
+		// 是否生成报告 默认未生成
+		riskArchives.setCheckStatus(Short.valueOf("0"));
 		// 银行卡号
 		riskArchives.setBank(auditObject.get("frms_pay_card_no") == null ? "" : auditObject.get("frms_pay_card_no").toString());
 		// 收款方ID
