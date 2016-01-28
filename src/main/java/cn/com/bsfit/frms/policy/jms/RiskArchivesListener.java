@@ -19,11 +19,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.listener.adapter.MessageListenerAdapter;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.alibaba.fastjson.JSON;
 
 import cn.com.bsfit.frms.obj.AuditObject;
 import cn.com.bsfit.frms.obj.AuditResult;
+import cn.com.bsfit.frms.obj.NotifyPolicy;
 import cn.com.bsfit.frms.obj.Risk;
 import cn.com.bsfit.frms.policy.jms.util.SessionAwareBatchMessageListener;
 import cn.com.bsfit.frms.policy.mapper.RiskArchivesMapper;
@@ -86,11 +88,18 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 		if(riskList != null && !riskList.isEmpty()) {
 			final StringBuffer ruleNames = new StringBuffer("");
 			final StringBuffer ruleCodes = new StringBuffer("");
+			final StringBuffer controlScodes = new StringBuffer("");
+			
 			for(Risk risk : riskList) {
 				ruleNames.append(risk.getRuleName()).append(',');
 				if (risk.getRuleName() != null) {
 					ruleCodes.append(risk.getRuleName().split(":").length > 1 ? risk.getRuleName().split(":")[1].trim() : "").append(',');
 	            }
+				final NotifyPolicy notifyPolicy = risk.getNotifyPolicy();
+				if(notifyPolicy != null && StringUtils.isEmpty(notifyPolicy.getCode())
+						&& !"NO".equals(notifyPolicy.getCode())) {
+					controlScodes.append(notifyPolicy.getCode().trim()).append(',');
+				}
 			}
 			if(ruleNames.charAt(ruleNames.length() - 1) == ',') {
 				ruleNames.deleteCharAt(ruleNames.length() - 1);
@@ -98,8 +107,13 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 			if(ruleCodes.charAt(ruleCodes.length() - 1) == ',') {
 				ruleCodes.deleteCharAt(ruleCodes.length() - 1);
 			}
+			if(controlScodes.charAt(controlScodes.length() - 1) == ',') {
+				controlScodes.deleteCharAt(controlScodes.length() - 1);
+			}
 			riskArchives.setComments(ruleNames.toString());
 			riskArchives.setRuleIds(ruleCodes.toString());
+			// 人行规则代码
+			riskArchives.setControlScode(controlScodes.toString());
 		}
 		// 创建时间
 		riskArchives.setCreateTime(auditObject.get("frms_create_time") == null ? new Date() : parse(auditObject.get("frms_create_time").toString()));
