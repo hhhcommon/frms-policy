@@ -181,6 +181,8 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 		riskArchives.setRefundNum(auditObject.get("frms_refund_num") == null ? Integer.MIN_VALUE : Integer.valueOf(auditObject.get("frms_refund_num").toString()));
 		// 产品号
 		riskArchives.setProductId(auditObject.get("frms_product_id") == null ? "" : auditObject.get("frms_product_id").toString());
+		// 收款方银行卡号
+		riskArchives.setControlFcode(auditObject.get("frms_col_card_no") == null ? "" : auditObject.get("frms_col_card_no").toString());
 		mapper.insertSelective(riskArchives);
 		return riskArchives.getArchivesId();
 	}
