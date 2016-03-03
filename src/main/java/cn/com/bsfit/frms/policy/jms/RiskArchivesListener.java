@@ -101,13 +101,13 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 					controlScodes.append(notifyPolicy.getCode().trim()).append(',');
 				}
 			}
-			if(ruleNames.charAt(ruleNames.length() - 1) == ',') {
+			if(ruleNames.length() > 1 && ruleNames.charAt(ruleNames.length() - 1) == ',') {
 				ruleNames.deleteCharAt(ruleNames.length() - 1);
 			}
-			if(ruleCodes.charAt(ruleCodes.length() - 1) == ',') {
+			if(ruleCodes.length() > 1 && ruleCodes.charAt(ruleCodes.length() - 1) == ',') {
 				ruleCodes.deleteCharAt(ruleCodes.length() - 1);
 			}
-			if(controlScodes.charAt(controlScodes.length() - 1) == ',') {
+			if(controlScodes.length() > 1 && controlScodes.charAt(controlScodes.length() - 1) == ',') {
 				controlScodes.deleteCharAt(controlScodes.length() - 1);
 			}
 			riskArchives.setComments(ruleNames.toString());
