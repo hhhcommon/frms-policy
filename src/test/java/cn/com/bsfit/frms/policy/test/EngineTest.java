@@ -32,7 +32,7 @@ public class EngineTest {
         converters.add(fastjson);
         template.setMessageConverters(converters);
 
-        String url = "http://10.100.1.42:9180/audit";
+        String url = "http://localhost:9180/audit";
         List<AuditObject> audits = new ArrayList<AuditObject>();
         AuditObject ao = new AuditObject();
         ao.setBizCode("PAY.P2P");
@@ -42,7 +42,7 @@ public class EngineTest {
         ao.put("frms_trans_time", new Date().getTime());
         ao.put("frms_order_type", "PAY.P2P");
         ao.put("frms_order_id", "111111111");
-        ao.put("frms_trans_amount", 1000*1000L);
+        // ao.put("frms_trans_amount", 2147483*1000L);
         ao.put("frms_or_state", 1);
         ao.put("frms_pay_card_no", "666666666666666666666666");
         ao.put("frms_col_card_no", "1111111111111");
@@ -60,8 +60,8 @@ public class EngineTest {
         ao.put("frms_device_num", "设备号");
         ao.put("frms_orderid", "商户订单号");
         ao.put("frms_trace", "机构请求流水");
-        ao.put("frms_refund_amount", 1);
-        ao.put("frms_refund_num", 2);
+//        ao.put("frms_refund_amount", 1);
+//        ao.put("frms_refund_num", 2);
         ao.put("frms_product_id", "P0000001");
         audits.add(ao);
         System.out.println(template.postForObject(url, audits, List.class));;

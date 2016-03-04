@@ -77,6 +77,8 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 	}
 	
 	private Long saveRiskArchives(final AuditObject auditObject, final AuditResult auditResult, final SqlSession sqlSession) throws ParseException {
+		LOGGER.info("auditObject:" + auditObject);
+		LOGGER.info("auditResult:" + auditResult);
 		final RiskArchives riskArchives = new RiskArchives();
 		final RiskArchivesMapper mapper = sqlSession.getMapper(RiskArchivesMapper.class);
 		// 支付方ID
@@ -176,9 +178,9 @@ public class RiskArchivesListener extends MessageListenerAdapter implements Sess
 		// 机构请求流水
 		riskArchives.setDeptRequestNum(auditObject.get("frms_trace") == null ? "" : auditObject.get("frms_trace").toString());
 		// 退款金额
-		riskArchives.setRefundAmount(auditObject.get("frms_refund_amount") == null ? Integer.MIN_VALUE : Integer.valueOf(auditObject.get("frms_refund_amount").toString()));
+		riskArchives.setRefundAmount(auditObject.get("frms_refund_amount") == null ? 0L : Long.valueOf(auditObject.get("frms_refund_amount").toString()));
 		// 退款次数
-		riskArchives.setRefundNum(auditObject.get("frms_refund_num") == null ? Integer.MIN_VALUE : Integer.valueOf(auditObject.get("frms_refund_num").toString()));
+		riskArchives.setRefundNum(auditObject.get("frms_refund_num") == null ? 0 : Integer.valueOf(auditObject.get("frms_refund_num").toString()));
 		// 产品号
 		riskArchives.setProductId(auditObject.get("frms_product_id") == null ? "" : auditObject.get("frms_product_id").toString());
 		// 收款方银行卡号

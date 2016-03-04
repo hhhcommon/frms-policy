@@ -85,7 +85,7 @@ public class RiskArchives implements Serializable {
 
     private String deptRequestNum;
 
-    private Integer refundAmount;
+    private Long refundAmount;
 
     private Integer refundNum;
 
@@ -415,11 +415,11 @@ public class RiskArchives implements Serializable {
         this.deptRequestNum = deptRequestNum == null ? null : deptRequestNum.trim();
     }
 
-    public Integer getRefundAmount() {
+    public Long getRefundAmount() {
         return refundAmount;
     }
 
-    public void setRefundAmount(Integer refundAmount) {
+    public void setRefundAmount(Long refundAmount) {
         this.refundAmount = refundAmount;
     }
 
